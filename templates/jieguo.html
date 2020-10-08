@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" id="html_box">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"> <!-- 定义这个东西，让他屏幕大小适应手机端-->
+    <meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+<!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+<!-- 适应移动端end -->
+    <meta name="nightmode" content="enable/disable">
+    <meta name="imagemode" content="force">
+<!-- 禁用掉uc浏览器判断到页面上文字居多时，会自动放大字体优化移动用户体验。 -->
+    <meta name="wap-font-scale" content="no">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/mobileSelect.css") }}">
+    <script src="{{ url_for('static',filename="js/mobileSelect.js") }}" type="text/javascript"></script>
+    <title>限制时间估算</title>
+    <style>
+        body{
+            width:100%;
+            margin:0;
+        }
+        .cailan{
+            width:100%;
+            height:25px;
+            margin:0;
+            margin-top:5px;
+            background-color:#31B16D;
+            border-radius: 15px 15px 0px 0px;
+        }
+        .cailan>img{
+            width:20px;
+            height:20px;
+            margin:0px;
+            margin-left:4%;
+            margin-bottom: 3px;
+            display:inline-block;
+            size-font:0px;
+        }
+        .cailan>h3{
+            display:inline-block;
+            vertical-align:text-bottom;
+            color:#FFFFFF;
+            font-weight:normal;
+            font-size:14pt;
+            margin:0px;
+            margin-bottom: 3px;
+        }
+        .shousuo{
+            display:inline-block;
+            position:absolute;
+            left:70%;
+            width:20%;
+            height:20px;
+            margin:0px;
+            margin-bottom: 3px;
+            {#height:30px;#}
+        }
+        .shousuo>h3{
+            display:inline-block;
+            color:#FFFFFF;
+            font-weight:normal;
+            font-size:100%;
+            margin:0px;
+        }
+        .shousuo>img{
+            width:15px;
+            height:10px;
+            display:inline-block;
+            size-font:0px;
+            margin:0px;
+
+        }
+        table{
+            border-collapse: collapse;
+            margin:0px;
+            cellspacing:0px;
+            width:100%;
+        }
+        th{
+            width:33%;
+            font-size: 110%;
+            color:#333333;
+            margin:0px;
+            font-weight:normal;
+            border-bottom:1.5px #DDDDDD solid;
+            border-right:2px #32B16E solid;
+        }
+        td{
+            align:center;
+            font-size:100%;
+            color:#666666;
+        }
+        .ceshi tr:nth-child(1n){
+            color:rebeccapurple;
+            display:block;
+        }
+        .nianlingxuanze{
+            width:100%;
+            height:40%;
+            background-color: #F4F4F4;
+            border-radius: 2px;
+            font-size: 110%;
+            text-align: left;
+            line-height:220%;
+            margin-top:3%;
+            color:#999999;
+        }
+    </style>
+
+</head>
+<body>
+{#与家庭成员接触#}
+
+{% for key in list(datas.keys()) %}
+    {% if key!='jiechuxianzhi' %}
+        <div style="width:95%;margin-left:2.5%;margin-top: 10px;box-shadow: 5px 5px 3px #F6F6F6;border-radius:15px">
+        <div class="cailan">
+            <img class="jiating_logo" src="{{ url_for('static',filename=key+'.png') }}">
+            <h3>{{ datas[key][-1]}}</h3>
+            <div class="shousuo" onclick="xianshi_yinceng('{{ key }}_img','{{ key }}')">
+                 <h3 >更多</h3>
+                {% if key =='jiating'  %}
+                    <img  id="{{ key }}_img" src="{{ url_for('static',filename='zhankai.png') }}">
+                {% else %}
+                    <img  id="{{ key }}_img" src="{{ url_for('static',filename='shouqi.png') }}">
+                {% endif %}
+            </div>
+        </div>
+    <table>
+        <thead>
+            <tr>
+                <th>接触距离</th>
+                <th>接触时间</th>
+                <th style="border-right:none">开始时间</th>
+            </tr>
+        </thead>
+            <tbody id="{{ key }}">
+        {% for i in range(len(datas.get(key))) %}
+            {%  if ((i+1)!=len(datas.get(key))) %}
+                {% if (i==0) %}
+                    <tr name="{{ key }}">
+                {% else %}
+
+                    {% if (i in (1,3,5,7,9)) %}
+                        <tr name="{{ key }}" style="display:none;background-color: #F1F9F5;color:#666666">
+                    {% else %}
+                        <tr name="{{ key }}" style="display:none">
+                    {% endif %}
+
+                {% endif %}
+                    <td align="center">{{ datas.get(key)[i][1] }}</td>
+                    <td align="center">{{ datas.get(key)[i][0] }}</td>
+                    <td align="center">{{ datas.get(key)[i][2] }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+     </div>
+    {% endif %}
+{% endfor %}
+
+    <div style="width:95%;margin-left:2.5%;margin-top: 10px;box-shadow: 5px 5px 3px #F6F6F6;border-radius:15px">
+    <div class="cailan" style="background-color:#B1C02C">
+        <img class="jiating_logo" src="{{ url_for('static',filename='xianzhi.png') }}">
+        <h3>限制性接触的终止时间</h3>
+    </div>
+    <div id="nianglingduan" class="nianlingxuanze">
+        家庭成员最小年龄选择
+    </div>
+    <h3 style="display:inline-block;">终止时间：</h3>
+    <h3 id="zhongzhishijian" style="display:inline-block;color:#B1C02C">0000-00-00</h3>
+    <div id="datas" style="display:none">{{ datas.get('jiechuxianzhi') }}</div>
+    </div>
+</body>
+<script>
+    var datas=document.getElementById("datas").innerHTML.slice(1,-1).split(',');
+    new MobileSelect({
+        trigger: '#nianglingduan',
+        title: '年龄段选择',
+        wheels: [{data:['<=1岁','1-6岁','>6岁(包含成人)']}],
+        position:[2],
+        callback:function(indexArr, data){
+            var jiechushijian=document.getElementById("zhongzhishijian")
+            if(data[0]==="&lt;=1岁"){
+                console.log(datas,datas[0])
+                jiechushijian.innerHTML=datas[8].slice(1,-1)
+            }else if (data[0]==="1-6岁")
+            {
+                 jiechushijian.innerHTML=datas[5].slice(1,-1)
+            } else if(data[0]==='&gt;6岁(包含成人)'){
+                 jiechushijian.innerHTML=datas[2].slice(1,-1)
+            }
+        }
+    })
+     document.body.onload = function (){
+        var datasa="{{ datas.keys() }}";
+        for(var a in datasa){
+            var trs=document.getElementById("jiating").children;
+            for(var i in trs){
+                trs[i].style.display=""
+            }
+        }
+    }
+    function　xianshi_yinceng(img_str,trs){
+        var dom=document.getElementById(img_str);
+        const src=dom.src.split("/").slice(-1);
+         var trs=document.getElementById(trs).children;
+        if(src == "shouqi.png"){
+            dom.src="/static/zhankai.png"
+            for(var i in trs){
+                trs[i].style.display=''
+            }
+            {#document.getElementById(trs).style.display="none"#}
+        }else{
+            dom.src="/static/shouqi.png"
+            for(var i in trs){
+                if(i==0){
+                    trs[i].style.display=''
+                }else{
+                     trs[i].style.display='none'
+                }
+            }
+        }
+
+    };
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0, user-scalable=no"> <!-- 定义这个东西，让他屏幕大小适应手机端-->
+    <meta name="apple-mobile-web-app-capable" content="yes"><!-- 删除苹果默认的工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- 设置苹果工具栏颜色 -->
+    <meta name="format-detection" content="telphone=no, email=no"><!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+<!-- 启用360浏览器的极速模式(webkit) -->
+    <meta name="renderer" content="webkit">
+<!-- 避免IE使用兼容模式 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+    <meta name="HandheldFriendly" content="true">
+<!-- 微软的老式浏览器 -->
+    <meta name="MobileOptimized" content="320">
+<!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+<!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+<!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+<!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+<!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+<!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+<!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
+<!-- 适应移动端end -->
+    <meta name="nightmode" content="enable/disable">
+    <meta name="imagemode" content="force">
+<!-- 禁用掉uc浏览器判断到页面上文字居多时，会自动放大字体优化移动用户体验。 -->
+    <meta name="wap-font-scale" content="no">
+    <title>碘-131残留量和限制时间估算</title>
+</head>
+<body style="background-color:#FFFFFF;">
+    <img style="width:100%;height:41%;margin-top:4.4%;"
+         src="{{ url_for('static',filename='backgroud.png') }}">
+    <h1 style="width:68%;font-size:140%;font-family:MicrosoftYaHei-Bold;display:block;position:relative;text-align: center;margin-left: 16%">
+        患者体内放射性碘(<sup>131</sup>I)残留量和限制时间估计
+    </h1>
+    <h6 style="display:block;width:76%;font-family:MicrosoftYaHei;text-align: center;font-size: 90%;
+    color:#666666;margin-left: 12%;margin-top:0;margin-bottom:0">
+        接触限制标准:与患者接触的家庭成员和公众的累积剂量
+        不可能超过1msv(毫希沃特)时,可解除患者限制.</h6>
+    <form method="get" action="/tc" style="width: 100%;height:5%;
+    position:relative;display:block;
+    margin-top:20%;">
+        <button id="update_button";
+                style="width:80%;height:100%;
+                background-color:#32B16E;
+                margin-left:10%;border-radius:5px;text-align:center;border:0px;margin-top:0";>
+            <h3 for="update_button" style="font-size:80%;
+            display:block;
+            width:100%;
+            height:100%;
+            font-family:SourceHanSanwsCN-Regular;color:#FFFFFF">开始估算</h3>
+        </button>
+    </form>
+</body>
+</html>
