@@ -304,13 +304,6 @@
             document.getElementById("cll").value=cookie_json['canyuliang']
          {#console.log(JSON.parse(cookie_save));#}
         }
-        {#alert("sdf")#}
-        {#if(document.getElementById("fuyaoshijian_save").value!=""){#}
-        {#    document.getElementById("fysj").innerHTML=document.getElementById("fuyaoshijian_save").value;#}
-        {#}#}
-        {#if(document.getElementById("fuyaoshijian_save").value!=""){#}
-        {#    document.getElementById("cylcdsj").innerHTML=document.getElementById("canyuliangcedingshijian_save").value;#}
-        {#}#}
     }
         var win_height=document.documentElement.clientHeight*0.98;
         document.getElementById("biaoti").top=win_height*0.01+'px'
@@ -327,7 +320,7 @@
             document.getElementById("fuyaoshijian_save").value=select_date;
         }
         })
-                new MobileSelect({
+        new MobileSelect({
         trigger: '#cylcdsj',
         title: '服药时间',
         wheels: data,
