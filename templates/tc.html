@@ -216,7 +216,7 @@
             is_error=true;
         }else(canyuliang.style.border="none")
         if(new Date(fuyaoshijian_txt)>new Date(canyuliangcedingshijian_txt)){
-            alert("服药时间大于测定时间")
+            {#alert("服药时间大于测定时间")#}
              canyuliangcedingshijian.style.border="1px red solid";
             is_error=true;
         }
@@ -293,16 +293,22 @@
         data.push(tmp_data_json)
         return data;
     }
+    function return_date(){
+        var l=[];
+        var dd=new Date();
+        l.push(20);
+        l.push(dd.getMonth())
+        l.push(dd.getDate()-1)
+        return l;
+    };
     document.body.onload = function(){
         var cookie_save=localStorage.getItem("cookie")
-        console.log(cookie_save)
         if(cookie_save!=null){
           var cookie_json=JSON.parse(cookie_save);
             document.getElementById("fysj").innerHTML=cookie_json['fuyaoshijian']
             document.getElementById("cylcdsj").innerHTML=cookie_json['cedingshijian']
             document.getElementById("fyl").value=cookie_json['fuyaoliang']
             document.getElementById("cll").value=cookie_json['canyuliang']
-         {#console.log(JSON.parse(cookie_save));#}
         }
     }
         var win_height=document.documentElement.clientHeight*0.98;
@@ -313,7 +319,7 @@
         trigger: '#fysj',
         title: '服药时间',
         wheels: data,
-        position:[19,0,0],
+        position:return_date(),
         callback:function(indexArr, data){
             var select_date=data[0].value.toString().split('年')[0]+'-'+data[1].value.toString().split('月')[0]+'-'+data[2].value.toString().split('日')[0]
             document.getElementById("fysj").innerHTML=select_date;
@@ -324,7 +330,7 @@
         trigger: '#cylcdsj',
         title: '服药时间',
         wheels: data,
-        position:[19,0,0],
+        position:return_date(),
         callback:function(indexArr, data){
             var select_date=data[0].value.toString().split('年')[0]+'-'+data[1].value.toString().split('月')[0]+'-'+data[2].value.toString().split('日')[0]
             document.getElementById("cylcdsj").innerHTML=select_date;
