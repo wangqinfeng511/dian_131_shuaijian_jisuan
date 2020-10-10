@@ -36,7 +36,7 @@
     <meta name="wap-font-scale" content="no">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename="css/mobileSelect.css") }}">
     <script src="{{ url_for('static',filename="js/mobileSelect.js") }}" type="text/javascript"></script>
-    <title>限制时间估算</title>
+    <title>接触限制时间估算</title>
     <style>
         body{
             width:100%;
@@ -48,11 +48,11 @@
             margin:0;
             margin-top:5px;
             background-color:#31B16D;
-            border-radius: 15px 15px 0px 0px;
+            border-radius: 6px 6px 0px 0px;
         }
         .cailan>img{
-            width:20px;
-            height:20px;
+            width:18px;
+            height:18px;
             margin:0px;
             margin-left:4%;
             margin-bottom: 3px;
@@ -136,15 +136,16 @@
 
 {% for key in list(datas.keys()) %}
     {% if key!='jiechuxianzhi' %}
-        <div style="width:95%;margin-left:2.5%;margin-top: 10px;box-shadow: 5px 5px 3px #F6F6F6;border-radius:15px">
+        <div style="width:95%;margin-left:2.5%;margin-top: 10px;box-shadow: 5px 5px 3px #F6F6F6;border-radius:10px">
         <div class="cailan">
             <img class="jiating_logo" src="{{ url_for('static',filename=key+'.png') }}">
             <h3>{{ datas[key][-1]}}</h3>
             <div class="shousuo" onclick="xianshi_yinceng('{{ key }}_img','{{ key }}')">
-                 <h3 >更多</h3>
                 {% if key =='jiating'  %}
+                    <h3 id="{{ key }}_gengduo_shouqi" style="margin-top:2px">收起</h3>
                     <img  id="{{ key }}_img" src="{{ url_for('static',filename='zhankai.png') }}">
                 {% else %}
+                    <h3 id="{{ key }}_gengduo_shouqi" style="margin-top:2px">更多</h3>
                     <img  id="{{ key }}_img" src="{{ url_for('static',filename='shouqi.png') }}">
                 {% endif %}
             </div>
@@ -225,18 +226,22 @@
             }
         }
     }
-    function　xianshi_yinceng(img_str,trs){
+    function　xianshi_yinceng(img_str,key){
         var dom=document.getElementById(img_str);
         const src=dom.src.split("/").slice(-1);
-         var trs=document.getElementById(trs).children;
+        var trs=document.getElementById(key).children;
+        console.log(src)
         if(src == "shouqi.png"){
             dom.src="/static/zhankai.png"
+            document.getElementById(key+"_gengduo_shouqi").innerHTML='收起'
             for(var i in trs){
                 trs[i].style.display=''
             }
+
             {#document.getElementById(trs).style.display="none"#}
         }else{
             dom.src="/static/shouqi.png"
+            document.getElementById(key+"_gengduo_shouqi").innerHTML="更多"
             for(var i in trs){
                 if(i==0){
                     trs[i].style.display=''
@@ -244,6 +249,7 @@
                      trs[i].style.display='none'
                 }
             }
+
         }
 
     };

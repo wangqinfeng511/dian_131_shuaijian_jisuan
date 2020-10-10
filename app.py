@@ -19,7 +19,7 @@ class jisuan_class():
         self.shuju_s('shuijiao',"睡觉接触", 0.3, fenzhong, is_xiaoshi=True);
         # 同事
         fenzhong = [4 * 60, 6 * 60, 8 * 60, 10 * 60, 12 * 60]
-        self.shuju_s('tongshi',"同事接触", 1, fenzhong, is_xiaoshi=True);
+        self.shuju_s('tongshi',"与同事接触", 1, fenzhong, is_xiaoshi=True);
         # 公交
         fenzhong = [1 * 60, 1.5 * 60, 2 * 60, 3 * 60]
         self.shuju_s('gongjiao',"公交接触", 0.1, fenzhong, is_xiaoshi=True);
