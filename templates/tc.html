@@ -210,13 +210,13 @@
             is_error=true;
         }else(fuyaoliang.style.border="none");
         if(parseFloat(canyuliang.value)<=0||fuyaoliang.value==""||
-            parseFloat(canyuliang.value)>=parseFloat(fuyaoliang.value)||parseFloat(canyuliang.value)>10.8){
+            parseFloat(canyuliang.value)>parseFloat(fuyaoliang.value)||parseFloat(canyuliang.value)>=10.8){
             alert("测定值大于出院标准！")
             canyuliang.style.border="1px red solid";
             is_error=true;
         }else(canyuliang.style.border="none")
         if(new Date(fuyaoshijian_txt)>new Date(canyuliangcedingshijian_txt)){
-            {#alert("服药时间大于测定时间")#}
+            alert("服药时间大于测定时间")
              canyuliangcedingshijian.style.border="1px red solid";
             is_error=true;
         }
